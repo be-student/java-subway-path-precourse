@@ -4,19 +4,20 @@ import java.util.function.Supplier;
 import subway.application.port.in.SubwayUseCase;
 
 public class SubwayClient {
+
     private final SubwayUseCase subwayUseCase;
     private final InputView inputView;
 
     public SubwayClient(SubwayUseCase subwayUseCase, InputView inputView) {
-        this.inputView=inputView;
+        this.inputView = inputView;
         this.subwayUseCase = subwayUseCase;
     }
 
-    public void run(){
-        GameCommand playerInput=GameCommand.START;
+    public void run() {
+        GameCommand playerInput = GameCommand.START;
         while (playerInput != GameCommand.QUIT) {
             calculateDistance();
-            playerInput= askRetry();
+            playerInput = askRetry();
         }
     }
 
@@ -28,7 +29,7 @@ public class SubwayClient {
         return repeat(inputView::askRetry);
     }
 
-    private  <T> T repeat(Supplier<T> playerInput){
+    private <T> T repeat(Supplier<T> playerInput) {
         try {
             return playerInput.get();
         } catch (IllegalArgumentException e) {
