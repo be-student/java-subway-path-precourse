@@ -7,10 +7,12 @@ public class SubwayClient {
 
     private final SubwayUseCase subwayUseCase;
     private final InputView inputView;
+    private final OutputView outputView;
 
-    public SubwayClient(SubwayUseCase subwayUseCase, InputView inputView) {
+    public SubwayClient(SubwayUseCase subwayUseCase, InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.subwayUseCase = subwayUseCase;
+        this.outputView = outputView;
     }
 
     public void run() {
@@ -40,7 +42,7 @@ public class SubwayClient {
         try {
             return playerInput.get();
         } catch (IllegalArgumentException e) {
-            System.out.print(e.getMessage());
+            outputView.printError(e.getMessage());
             return repeat(playerInput);
         }
     }
