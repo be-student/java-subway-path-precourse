@@ -21,7 +21,7 @@ public class SubwayClient {
             if (playerInput == GameCommand.QUIT) {
                 return;
             }
-            calculateDistance();
+            repeat(this::calculateDistance);
         }
     }
 
@@ -44,6 +44,15 @@ public class SubwayClient {
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             return repeat(playerInput);
+        }
+    }
+
+    private void repeat(Runnable run) {
+        try {
+            run();
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            repeat(run);
         }
     }
 
