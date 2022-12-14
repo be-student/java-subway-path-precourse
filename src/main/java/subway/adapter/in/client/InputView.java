@@ -30,4 +30,16 @@ public class InputView {
         System.out.println("## 원하는 기능을 선택하세요.");
         return DistanceType.fromCommand(scanner.nextLine());
     }
+
+    public String askStartStation() {
+        System.out.println();
+        System.out.println("## 출발역을 입력하세요.");
+        return scanner.nextLine();
+    }
+
+    public String askEndStation() {
+        System.out.println();
+        System.out.println("## 도착역을 입력하세요.");
+        return scanner.nextLine();
+    }
 }

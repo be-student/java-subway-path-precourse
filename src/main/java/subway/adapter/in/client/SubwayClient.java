@@ -1,7 +1,9 @@
 package subway.adapter.in.client;
 
 import java.util.function.Supplier;
+import subway.application.port.in.MinimumDistanceCommand;
 import subway.application.port.in.SubwayUseCase;
+import subway.domain.SubwayResultDto;
 
 public class SubwayClient {
 
@@ -31,6 +33,12 @@ public class SubwayClient {
             if (distanceType == DistanceType.BACK) {
                 return;
             }
+            String startStation = inputView.askStartStation();
+            String endStation = inputView.askEndStation();
+            MinimumDistanceCommand minimumDistanceCommand = new MinimumDistanceCommand(
+                    distanceType.getCommand(), startStation, endStation);
+            SubwayResultDto subwayResultDto = subwayUseCase.calculateResult(minimumDistanceCommand);
+            outputView.printResult(subwayResultDto);
         }
     }
 
