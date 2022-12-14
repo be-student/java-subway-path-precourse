@@ -14,15 +14,22 @@ public class SubwayClient {
     }
 
     public void run() {
-        GameCommand playerInput = GameCommand.START;
-        while (playerInput != GameCommand.QUIT) {
+        while (true) {
+            GameCommand playerInput = askRetry();
+            if (playerInput == GameCommand.QUIT) {
+                return;
+            }
             calculateDistance();
-            playerInput = askRetry();
         }
     }
 
     private void calculateDistance() {
-
+        while (true) {
+            DistanceType distanceType = askType();
+            if (distanceType == DistanceType.BACK) {
+                return;
+            }
+        }
     }
 
     private GameCommand askRetry() {
