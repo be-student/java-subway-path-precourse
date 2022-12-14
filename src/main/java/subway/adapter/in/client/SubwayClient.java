@@ -44,4 +44,8 @@ public class SubwayClient {
             return repeat(playerInput);
         }
     }
+
+    private DistanceType askType() {
+        return repeat(inputView::askType);
+    }
 }
