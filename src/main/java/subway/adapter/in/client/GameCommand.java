@@ -9,7 +9,7 @@ public enum GameCommand {
     private final String command;
 
     GameCommand(String command) {
-        this.command=command;
+        this.command = command;
     }
 
     public static GameCommand fromCommand(String command) {
