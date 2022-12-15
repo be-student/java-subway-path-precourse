@@ -28,18 +28,16 @@ public class SubwayClient {
     }
 
     private void calculateDistance() {
-        while (true) {
-            DistanceType distanceType = askType();
-            if (distanceType == DistanceType.BACK) {
-                return;
-            }
-            String startStation = inputView.askStartStation();
-            String endStation = inputView.askEndStation();
-            MinimumDistanceCommand minimumDistanceCommand = new MinimumDistanceCommand(
-                    distanceType.getCommand(), startStation, endStation);
-            SubwayResultDto subwayResultDto = subwayUseCase.calculateResult(minimumDistanceCommand);
-            outputView.printResult(subwayResultDto);
+        DistanceType distanceType = askType();
+        if (distanceType == DistanceType.BACK) {
+            return;
         }
+        String startStation = inputView.askStartStation();
+        String endStation = inputView.askEndStation();
+        MinimumDistanceCommand minimumDistanceCommand = new MinimumDistanceCommand(
+                distanceType.getCommand(), startStation, endStation);
+        SubwayResultDto subwayResultDto = subwayUseCase.calculateResult(minimumDistanceCommand);
+        outputView.printResult(subwayResultDto);
     }
 
     private GameCommand askRetry() {
@@ -57,7 +55,7 @@ public class SubwayClient {
 
     private void repeat(Runnable run) {
         try {
-            run();
+            run.run();
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             repeat(run);
