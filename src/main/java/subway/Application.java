@@ -1,10 +1,18 @@
 package subway;
 
 import java.util.Scanner;
+import subway.adapter.in.client.InputView;
+import subway.adapter.in.client.OutputView;
+import subway.adapter.in.client.SubwayClient;
+import subway.application.SubwayApplication;
 
 public class Application {
+
     public static void main(String[] args) {
-        final Scanner scanner = new Scanner(System.in);
-        // TODO: 프로그램 구현
+        Scanner scanner = new Scanner(System.in);
+        InputView inputView = new InputView(scanner);
+        OutputView outputView = new OutputView();
+        SubwayClient subwayClient = new SubwayClient(new SubwayApplication(), inputView, outputView);
+        subwayClient.run();
     }
 }

@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class StationRepository {
+
     private static final List<Station> stations = new ArrayList<>();
+
+    private StationRepository() {
+    }
 
     public static List<Station> stations() {
         return Collections.unmodifiableList(stations);
@@ -22,5 +26,12 @@ public class StationRepository {
 
     public static void deleteAll() {
         stations.clear();
+    }
+
+    public static void throwIfNotExist(String name) {
+        stations().stream()
+                .filter(it -> it.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("없는 지하철역입니다"));
     }
 }
